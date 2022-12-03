@@ -1,3 +1,4 @@
+package day2
 import java.io.File
 
 fun main(args: Array<String>) {
@@ -65,7 +66,7 @@ fun main(args: Array<String>) {
     println(result)
 }
 
-infix fun RockPaperScissors.play(other: RockPaperScissors): Int {
+private infix fun RockPaperScissors.play(other: RockPaperScissors): Int {
     if (this == other) return 3
     return if (other.ordinal == (this.ordinal + 2) % 3) 6
     else 0
