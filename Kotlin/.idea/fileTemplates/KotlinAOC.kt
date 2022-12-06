@@ -2,7 +2,7 @@
 #set ($day = $NAME.substring(1, $separatorIndex))
 import common.AoCData
 
-fun main(args: Array<String>) {
+fun main() {
 
     val data = AoCData(
         filePath = "./${day}/input.txt",
