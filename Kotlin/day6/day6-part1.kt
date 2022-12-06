@@ -1,27 +1,17 @@
 import common.AoCData
 
-fun main(args: Array<String>) {
+fun main() {
 
     val data = AoCData(
         filePath = "./day6/input.txt",
-        """
-            mjqjpqmgbljsphdztnvjfqwrcgsmlb
-        """,
+        "mjqjpqmgbljsphdztnvjfqwrcgsmlb",
         "bvwbjplbgvbhsrlpgdmjqwftvncz",
         "nppdvjthqldpwncqszvftbrmjlhg",
         "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg",
         exampleId = null
     )
 
-    val result = data.currentString().let {
-        it.mapIndexed { index, c ->
-            if (index < 4)
-                false
-            else
-                arrayOf(c, it[index - 1], it[index - 2], it[index - 3]).distinct().size == 4
-        }
-    }.indexOfFirst { it } + 1
-
+    val result = data.currentString().windowed(4).indexOfFirst { it.toCharArray().distinct().size == it.length } + 4
     println(result)
 
 }
