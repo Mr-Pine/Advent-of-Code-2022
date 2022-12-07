@@ -15,7 +15,7 @@ fun main() {
 
     // Day 4
     println("4/1: " + File("./day4/input.txt").readText().trim().lines().map { it.split(",").map { it.split("-") }.map { it[0].toInt()..it[1].toInt() } }.count { (it[0].contains(it[1].first) && it[0].contains(it[1].last)) || (it[1].contains(it[0].first) && it[1].contains(it[0].last)) })
-    println("4/2: " + File("./day4/input.txt").readText().trim().lines().map { it.split(",").map { it.split("-") }.map { it[0].toInt()..it[1].toInt() } }.count { (it[0].contains(it[1].first) || it[0].contains(it[1].last)) || (it[1].contains(it[0].first) || it[1].contains(it[0].last)) })
+    println("4/2: " + File("./day4/input.txt").readText().trim().lines().map { it.split(",").map { it.split("-") }.map { it[0].toInt()..it[1].toInt() } }.count { (it[0].contains(it[1].first) || it[0].contains(it[1].last)) || it[1].contains(it[0].first) })
 
     // Day 5
     println("5/1: " + File("./day5/input.txt").readText().trim().split("\n\n").let { it[0].lines().let { it.subList(0, it.size -1) }.reversed().map { it.chunked(4).map { it[1] } }.let { it[0].indices.map { stackIndex -> it.map { it[stackIndex] }.filter { it != ' ' }.toMutableList() } } to it[1].lines().map { it.split(" ").let { Triple(it[1].toInt(), it[3].toInt() - 1, it[5].toInt() -1) } } }.let { (stacks, instructions) -> stacks.apply { instructions.forEach { (amount, from, to) -> stacks[to].addAll((0 until amount).map { stacks[from].removeLast() }) } }.joinToString("") { it.last().toString() } })
