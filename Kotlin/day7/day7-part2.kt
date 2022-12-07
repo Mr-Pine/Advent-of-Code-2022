@@ -34,6 +34,7 @@ fun main(args: Array<String>) {
 
     val directories = mutableMapOf<String, Int>()
     val pathStack = mutableListOf<String>()
+    val counted = mutableListOf<String>()
 
     data.currentString().split("$").map(String::trim).filter(String::isNotBlank).forEach {
         val commandArgs = it.lines()[0].split(" ")
@@ -41,18 +42,19 @@ fun main(args: Array<String>) {
             if(commandArgs[1] == "..") pathStack.removeLast()
             else pathStack.add(commandArgs[1])
         } else {
-            it.lines().drop(1).map { it.split(" ") }.filter { it[0] != "dir" }.map { it[0].toInt() }
-                .forEach {
-                        fileSize ->
-                    pathStack.indices.forEach { dirIndex ->
-                        val path = pathStack.subList(0, dirIndex + 1).joinToString("/")
-                        directories[path] = (directories[path] ?: 0) + fileSize
+            if(!counted.contains(pathStack.joinToString("/"))) {
+                counted.add(pathStack.joinToString("/"))
+                it.lines().drop(1).map { it.split(" ") }.filter { it[0] != "dir" }.map { it[0].toInt() }
+                    .forEach { fileSize ->
+                        pathStack.indices.forEach { dirIndex ->
+                            val path = pathStack.subList(0, dirIndex + 1).joinToString("/")
+                            directories[path] = (directories[path] ?: 0) + fileSize
+                        }
                     }
-                }
+            }
         }
     }
 
-    println(directories)
     println(directories.filter { it.value >= (directories["/"]!! - 40000000)}.minBy(Map.Entry<String, Int>::value))
 
 }
