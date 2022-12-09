@@ -1,4 +1,6 @@
 import java.io.File
+import kotlin.math.absoluteValue
+import kotlin.math.sign
 
 fun main() {
     // Day 1
@@ -32,4 +34,8 @@ fun main() {
     // Day 8
     println("8/1: " + File("./day8/input.txt").readText().trim().lines().map { it.map { it.digitToInt() } }.let{ grid -> grid.mapIndexed { rowIndex, treeRow -> treeRow.mapIndexed { treeIndex, tree -> grid.map { it[treeIndex] }.let { column -> listOf(column.subList(0, rowIndex), column.reversed().subList(0, column.lastIndex - rowIndex), treeRow.subList(0, treeIndex), treeRow.reversed().subList(0, column.lastIndex - treeIndex)).map { it.maxOrNull()?.let { it < tree } ?: true }.fold(false) { acc, value -> acc || value } } } } }.sumOf { it.count { it } })
     println("8/1: " + File("./day8/input.txt").readText().trim().lines().map { it.map { it.digitToInt() } }.let{ grid -> grid.mapIndexed { rowIndex, treeRow -> treeRow.mapIndexed { treeIndex, tree -> grid.map { it[treeIndex] }.let { column -> listOf(column.subList(0, rowIndex), column.reversed().subList(0, column.lastIndex - rowIndex), treeRow.subList(0, treeIndex), treeRow.reversed().subList(0, column.lastIndex - treeIndex)).map { it.reversed().takeIf { it.isNotEmpty() }?.let { it.indexOfFirst { it >= tree }.takeIf { it != -1 }?.let { it + 1 } ?: it.size } ?: 0 }.fold(1) { product, value -> product * value } } } } }.maxOf { it.max() } )
+
+    // Day 9
+    println("9/1: " + File("./day9/input.txt").readText().trim().lines().map { it.split(" ").let { instruction -> List(instruction[1].toInt()) { instruction[0] } } }.flatten() .scan((0 to 0) to (0 to 0)) { (oldHead, tail), move -> mapOf("R" to (1 to 0), "L" to (-1 to 0), "U" to (0 to 1), "D" to (0 to -1))[move]!!.let { oldHead.first + it.first to oldHead.second + it.second }.let { head -> head to if (!((head.first - tail.first).absoluteValue <= 1 && (head.second - tail.second).absoluteValue <= 1)) ((head.first - tail.first).let { it.sign * (Integer.min(it.absoluteValue, 1)) } + tail.first to (head.second - tail.second).let { it.sign * Integer.min(it.absoluteValue, 1) } + tail.second) else tail } }.map { it.second }.toSet().size )
+    println("9/2: " + File("./day9/input.txt").readText().trim().lines().asSequence().map { it.split(" ").let { instruction -> List(instruction[1].toInt()) { instruction[0] } } }.flatten().scan(List(10) { 0 to 0 }) { knots, move -> knots.drop(1).scan(mapOf("R" to (1 to 0), "L" to (-1 to 0), "U" to (0 to 1), "D" to (0 to -1))[move]!!.let { knots[0].first + it.first to knots[0].second + it.second }) { previousKnot, currentKnot -> if (!((previousKnot.first - currentKnot.first).absoluteValue <= 1 && (previousKnot.second - currentKnot.second).absoluteValue <= 1)) { ( (previousKnot.first - currentKnot.first).let { it.sign * Integer.min( it.absoluteValue, 1 ) } to (previousKnot.second - currentKnot.second).let { it.sign * Integer.min( it.absoluteValue, 1 ) } ).let { currentKnot.first + it.first to currentKnot.second + it.second } } else { currentKnot } } }.map { it.last() }.toSet().size)
 }

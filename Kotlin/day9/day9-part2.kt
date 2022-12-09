@@ -25,7 +25,7 @@ fun main() {
 
     val knotsInitial = List(10) { 0 to 0 }
 
-    val result = data.lines().map { it.split(" ").let { instruction -> List(instruction[1].toInt()) { instruction[0] } } }
+    val result = data.lines().asSequence().map { it.split(" ").let { instruction -> List(instruction[1].toInt()) { instruction[0] } } }
         .flatten()
         .scan(knotsInitial) { knots, move ->
             knots.drop(1)
