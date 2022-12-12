@@ -161,9 +161,17 @@ fun main() {
         exampleId = null
     )
 
-    val result = data.lines().map { it.split(" ").map { it.toIntOrNull() ?: 0 } }.flatten().scan(1) { acc, i -> acc + i }.mapIndexed { crtPointer, register ->
-        '#'.takeIf { ((crtPointer % 40) - register).absoluteValue <= 1 } ?: '.'
-    }.chunked(40).joinToString("\n") { it.joinToString("") }
+    val result = data.lines().map {
+            it.split(" ").map { it.toIntOrNull() ?: 0 }
+        }
+        .flatten().scan(1) { acc, i ->
+            acc + i
+        }
+        .mapIndexed { crtPointer, register ->
+            '#'.takeIf { ((crtPointer % 40) - register).absoluteValue <= 1 } ?: '.'
+        }.chunked(40).joinToString("\n") {
+            it.joinToString("")
+        }
 
     println(result)
 
