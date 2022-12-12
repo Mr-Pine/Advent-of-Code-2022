@@ -29,7 +29,7 @@ fun main() {
 
     while (!paths.map(Pair<Pair<Int, Int>, Int>::first).contains(end)) {
         paths = paths.map { (end, length) ->
-            end.surrounding().filter { it.first in 0..grid.lastIndex && it.second in 0..grid[0].lastIndex }.filter { grid[it].code - grid[end].code <= 1 }.map {
+            end.surrounding().filter { it.first in 0..grid.lastIndex && it.second in 0..grid[0].lastIndex }.filter { grid[it] - grid[end] <= 1 }.map {
                 it to length + 1
             }
         }.flatten().groupBy { it.first }.values.map { it.minBy { it.second } }

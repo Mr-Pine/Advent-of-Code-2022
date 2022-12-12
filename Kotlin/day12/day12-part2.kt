@@ -35,7 +35,7 @@ fun main() {
         paths = paths.map { (pathEnd, length) ->
             pathEnd.surrounding()
                 .filter { it.first in 0..grid.lastIndex && it.second in 0..grid[0].lastIndex }
-                .filter { grid[pathEnd].code - grid[it].code <= 1 }.map {
+                .filter { grid[pathEnd] - grid[it] <= 1 }.map {
                     it to length + 1
                 }
         }.flatten().groupBy { it.first }.values.map { it.minBy { it.second } }
