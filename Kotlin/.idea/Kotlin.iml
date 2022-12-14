@@ -14,5 +14,6 @@
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-script-runtime:1.7.21" level="project" />
     <orderEntry type="library" name="varabyte.kotter" level="project" />
+    <orderEntry type="library" name="jetbrains.kotlin.script.runtime" level="project" />
   </component>
 </module>
