@@ -38,28 +38,29 @@ fun main() {
         }.flatten().toMutableSet()
 
     val lowest = filled.maxBy { it.second }.second
+    val floor = lowest + 2
 
     var currentSand = 500 to 0
-    var sandCount = 0
+    var wallSize = filled.size
 
-    while (currentSand.second <= lowest) {
+    while ((500 to 0) !in filled) {
         val down = currentSand.first to currentSand.second + 1
         val downLeft = currentSand.first - 1 to currentSand.second + 1
         val downRight = currentSand.first + 1 to currentSand.second + 1
 
-        currentSand = if (down !in filled) {
+
+        currentSand = if (down !in filled && down.second < floor) {
             down
-        } else if (downLeft !in filled) {
+        } else if (downLeft !in filled && down.second < floor) {
             downLeft
-        } else if (downRight !in filled) {
+        } else if (downRight !in filled && down.second < floor) {
             downRight
         } else {
             filled.add(currentSand)
-            sandCount++
-            500 to 0
+            (500 to 0)
         }
     }
 
-    println(sandCount)
+    println(filled.size - wallSize)
 
 }
