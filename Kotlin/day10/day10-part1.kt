@@ -157,7 +157,7 @@ fun main() {
             addx 3
             addx -5
         """,
-        exampleId = null
+        exampleIndex = null
     )
 
     val result = data.lines().map { it.split(" ").map { it.toIntOrNull() ?: 0 } }.flatten().scan(1) { acc, i -> acc + i }.mapIndexed { index, i -> i * (index + 1) }.let { signalStrengths -> listOf(20, 60, 100, 140, 180, 220).sumOf { signalStrengths[it - 1] } }

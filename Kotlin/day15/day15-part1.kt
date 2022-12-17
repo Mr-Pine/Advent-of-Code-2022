@@ -2,7 +2,6 @@ import common.AoCData
 import common.abs
 import common.manhattanDistance
 import common.minus
-import kotlin.math.sign
 
 fun main() {
 
@@ -24,7 +23,7 @@ fun main() {
             Sensor at x=14, y=3: closest beacon is at x=15, y=3
             Sensor at x=20, y=1: closest beacon is at x=15, y=3
         """,
-        exampleId = null
+        exampleIndex = null
     )
 
     val signalBeacons = data.lines()

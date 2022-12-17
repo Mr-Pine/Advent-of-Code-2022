@@ -8,7 +8,8 @@ fun main() {
         filePath = "./${day}/input.txt",
         """
             
-        """
+        """,
+        exampleIndex = 0
     )
 
     val result = data.lines()

@@ -17,7 +17,7 @@ fun main() {
             L 5
             R 2
         """,
-        exampleId = null
+        exampleIndex = null
     )
 
     val moves = mapOf("R" to (1 to 0), "L" to (-1 to 0), "U" to (0 to 1), "D" to (0 to -1))

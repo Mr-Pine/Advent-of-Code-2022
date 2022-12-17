@@ -29,7 +29,7 @@ fun main(args: Array<String>) {
             5626152 d.ext
             7214296 k
         """,
-        exampleId = null
+        exampleIndex = null
     )
 
     val directories = mutableMapOf<String, Int>()

@@ -1,5 +1,4 @@
 import common.AoCData
-import kotlin.reflect.KFunction
 
 fun main() {
 
@@ -34,7 +33,7 @@ fun main() {
             If true: throw to monkey 0
             If false: throw to monkey 1
         """,
-        exampleId = null
+        exampleIndex = null
     )
 
     val result = data.currentString().split("\n\n").map { it.lines().drop(1) }.map { Monkey(it) }.let { monkeys ->

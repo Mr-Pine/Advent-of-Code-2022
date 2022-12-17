@@ -11,7 +11,7 @@ fun main() {
             33549
             35390
         """,
-        exampleId = null
+        exampleIndex = null
     )
 
     val result = data.lines().map { it.map { it.digitToInt() } }.let{ grid -> grid.mapIndexed { rowIndex, treeRow ->

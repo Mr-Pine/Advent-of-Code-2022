@@ -158,7 +158,7 @@ fun main() {
             addx 3
             addx -5
         """,
-        exampleId = null
+        exampleIndex = null
     )
 
     val result = data.lines().map {

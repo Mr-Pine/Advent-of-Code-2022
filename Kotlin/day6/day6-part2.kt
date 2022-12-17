@@ -8,7 +8,7 @@ fun main() {
         "bvwbjplbgvbhsrlpgdmjqwftvncz",
         "nppdvjthqldpwncqszvftbrmjlhg",
         "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg",
-        exampleId = null
+        exampleIndex = null
     )
 
     val result = data.currentString().windowed(14).indexOfFirst { it.toCharArray().distinct().size == it.length } + 14

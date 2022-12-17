@@ -9,7 +9,7 @@ fun main() {
             accszExk
             acctuvwj
             abdefghi
-        """, exampleId = null
+        """, exampleIndex = null
     )
 
     val grid = data.lines().map { it.asSequence().toMutableList() }
