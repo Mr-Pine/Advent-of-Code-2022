@@ -10,3 +10,7 @@ class AoCData(filePath: String, vararg exampleStrings: String, private var examp
 
     fun lines() = currentString().lines()
 }
+
+fun List<Int>.product() {
+    fold(1) { acc, i -> acc * i }
+}

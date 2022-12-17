@@ -45,8 +45,8 @@ fun main() {
             }
         }
     }.let { monkeys ->
-        monkeys.apply { repeat(20) { forEach { it.takeTurn() } } }
-    }.map { it.inspectionCount }.sorted().takeLast(2).let { it[0] * it[1] }
+        monkeys.apply { repeat(1) { forEach { it.takeTurn() } } }
+    }.map { "${it.items}, ${it.inspectionCount}" }//.sorted().takeLast(2).let { it[0] * it[1] }
 
     println(result)
 

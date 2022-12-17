@@ -42,4 +42,14 @@ fun main() {
     // Day 10
     println("10/1: " + File("./day10/input.txt").readText().trim().lines().map { it.split(" ").map { it.toIntOrNull() ?: 0 } }.flatten().scan(1) { acc, i -> acc + i }.mapIndexed { index, i -> i * (index + 1) }.let { signalStrengths -> listOf(20, 60, 100, 140, 180, 220).sumOf { signalStrengths[it - 1] } })
     println("10/1: " + File("./day10/input.txt").readText().trim().lines().map { it.split(" ").map { it.toIntOrNull() ?: 0 } }.flatten().scan(1) { acc, i -> acc + i }.dropLast(1).mapIndexed { crtPointer, register -> "🎁".takeIf { ((crtPointer % 40) - register).absoluteValue <= 1 } ?: "🎄" }.chunked(40).joinToString("\n      ") { it.joinToString("") })
+
+    // Day 11                                                                                                                               // Triple((operation to operand), divisor, (trueIndex to falseIndex)) to (items to inspectionCount)
+    println("11/1: " + File("./day11/example.txt").readText().trim().split("\n\n").map { it.lines().drop(1) }.map { monkey -> Triple<Pair<(Int, Int) -> Int, Int?>, Int, Pair<Int, Int>>((({ self: Int, other: Int -> self * other}.takeIf { monkey[1].contains("*") } ?: { self: Int, other: Int -> self + other}) as ((Int, Int) -> Int) to monkey [1].trim().split(" ").last().toIntOrNull()), monkey[2].trim().split(" ").last().toInt(), (monkey[3].trim().split(" ").last().toInt() to monkey[4].trim().split(" ").last().toInt())) to (monkey[0].trim().drop(16).split(", ").map { it.toInt() }.toMutableList() to mutableListOf(0)) }.let { monkeys -> monkeys.apply { repeat(1) {
+        forEach { monkey ->
+            monkey.second.apply {
+                second[0] += first.size
+            }.first.onEach { item ->
+                (monkey.first.first.first(item, monkey.first.first.second ?: item) / 3).let { worryLevel ->
+            ( monkeys[monkey.first.third.first + 1].takeIf { worryLevel % monkey.first.second == 0 } ?: monkeys[monkey.first.third.first + 1])!!.second.first.add(worryLevel) } }
+                .clear() } } } })
 }
